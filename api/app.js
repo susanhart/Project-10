@@ -4,6 +4,7 @@
 const express = require("express");
 const morgan = require("morgan"); //request logger that prints stuff out about your server request for you
 const Sequelize = require("sequelize"); //importing sequelize
+const cors = require("cors");
 
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
@@ -188,6 +189,8 @@ sequelize.authenticate().then(function(err) {
 // setup morgan which gives us http request logging
 app.use(morgan("dev"));
 
+app.use(cors());
+
 // TODO setup your api routes here
 
 // setup a friendly greeting for the root route
@@ -208,8 +211,12 @@ app.get("/api/users", authenticateUser, async (req, res) => {
 
 //Create the course routes
 //GET /api/courses 200 - Returns a list of courses (including the user that owns each course)
+var corsOptions = {
+  origin: 'localhost:3000',
+  optionsSuccessStatus: 200
+};
 
-app.get("/api/courses", async (req, res) => {
+app.get("/api/courses", cors(corsOptions), async (req, res) => {
     console.log("we got all courses")
     const courses = await Course.findAll();
       res.status(200).json({
