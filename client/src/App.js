@@ -6,9 +6,9 @@ import './App.css';
 class App extends Component {
   componentDidMount() {
     $.ajax({
-      url: "localhost:5000/api/courses", 
+      url: "http://localhost:5000/api/courses", 
       success: function(result){ 
-        $("#div1").html(result);
+        console.log(result.courses)
       }
     });
   }
