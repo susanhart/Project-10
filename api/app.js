@@ -211,12 +211,8 @@ app.get("/api/users", authenticateUser, async (req, res) => {
 
 //Create the course routes
 //GET /api/courses 200 - Returns a list of courses (including the user that owns each course)
-var corsOptions = {
-  origin: 'localhost:3000',
-  optionsSuccessStatus: 200
-};
 
-app.get("/api/courses", cors(corsOptions), async (req, res) => {
+app.get("/api/courses", async (req, res) => {
     console.log("we got all courses")
     const courses = await Course.findAll();
       res.status(200).json({
