@@ -226,7 +226,7 @@ app.get("/api/courses", async (req, res) => {
 });
 
     // ADD OWNER OF THE COURSE
-    //GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
+    //GET /api/courses/:id 200 - Returns the course (including the user that owns the course) for the provided course ID
 
 app.get("/api/courses/:id", async (req, res) => {
   const course = await Course.findByPk(req.params.id, {
