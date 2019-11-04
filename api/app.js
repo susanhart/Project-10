@@ -4,7 +4,6 @@
 const express = require("express");
 const morgan = require("morgan"); //request logger that prints stuff out about your server request for you
 const Sequelize = require("sequelize"); //importing sequelize
-const cors = require("cors");
 
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
@@ -130,7 +129,10 @@ Course.init(
     //initializes the model object
     id: {
       type: Sequelize.INTEGER,
-      primaryKey: true //properties of the user
+      primaryKey: true, //properties of the user
+      allowNull: false,
+      autoIncrement: true,
+
     },
     title: {
       type: Sequelize.STRING, //properties of the course
@@ -189,8 +191,6 @@ sequelize.authenticate().then(function(err) {
 // setup morgan which gives us http request logging
 app.use(morgan("dev"));
 
-app.use(cors());
-
 // TODO setup your api routes here
 
 // setup a friendly greeting for the root route
@@ -214,7 +214,12 @@ app.get("/api/users", authenticateUser, async (req, res) => {
 
 app.get("/api/courses", async (req, res) => {
     console.log("we got all courses")
-    const courses = await Course.findAll();
+    const courses = await Course.findAll({include:[{
+      model:User,
+      as: "user",
+      attributes: ['id','firstName','lastName']
+    }]
+  });
       res.status(200).json({
         courses
       });
@@ -224,7 +229,13 @@ app.get("/api/courses", async (req, res) => {
     //GET /api/courses/:id 200 - Returns a the course (including the user that owns the course) for the provided course ID
 
 app.get("/api/courses/:id", async (req, res) => {
-  const course = await Course.findByPk(req.params.id);
+  const course = await Course.findByPk(req.params.id, {
+    include:[{
+      model:User,
+      as: "user",
+      attributes: ['id','firstName','lastName']
+    }]
+  });
 
   if (course === null) {
     res.status(404).json({message: "This course does not exist"});
@@ -237,15 +248,18 @@ app.get("/api/courses/:id", async (req, res) => {
 
 app.post("/api/courses", authenticateUser, async (req, res, next) => {
   const course = req.body
-  console.log('debugging, here is the course: ',course)
   try{
-    const id = await Course.create(course)
-    console.log(id)
+    const courseWithId = await Course.create(course)
+    res.location(`/api/courses/${courseWithId.id}`);
+    console.log(courseWithId)
     res.status(201).end()
   }catch(err){
-    console.log(err)
-    //res.status(400).end()
-    next(err)
+    if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
+  res.status(400).json({error: err.message})
+} else {
+  return next(err);
+}
+
   }
 })
 
@@ -300,17 +314,35 @@ app.delete("/api/courses/:id", authenticateUser, async (req, res) => {
 //POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
 app.post("/api/users", async (req, res, next) => {
   try {
-       // Get the user from the request body.
-    req.body.password = bcryptjs.hashSync(req.body.password);
-    await User.create(req.body);
+  let firstName = req.body.firstName
+  let lastName = req.body.lastName
+  let emailAddress = req.body.emailAddress
+  let password = req.body.password 
+
+   // Get the user from the request body. 
+    if (firstName && lastName && emailAddress && password) {
+      password = bcryptjs.hashSync(password);
+      let updatedUser = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "emailAddress": emailAddress,
+        "password": password
+      }
+    await User.create(updatedUser);
     res.location('/');
     res.status(201).end();
+    } else {
+      res.status(400).json({error:"Please provide the missing information"})
+    }
+       
 } catch(err){
-console.log(err)
-next(err)
+  if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
+  res.status(400).json({error: err.message})
+} else {
+  return next(err);
 }
-
-});
+}
+})
 
 // send 404 if no other route matched
 app.use((req, res) => {
