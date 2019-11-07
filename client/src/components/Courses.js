@@ -7,6 +7,7 @@ class Courses extends Component {
         result: []
       };
     }
+    componentWillMount()
     render() {
     return <div> test </div>
 }}
