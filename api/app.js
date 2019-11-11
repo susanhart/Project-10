@@ -8,8 +8,6 @@ const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
 
-//app.use(cors());
-
 const authenticateUser = async (req, res, next) => {
     let message = null;
 
@@ -74,6 +72,8 @@ app.use(
   })
 );
 app.use(express.json());
+
+app.use(cors());
 
 //Define Your Sequelize Models
 
