@@ -4,9 +4,11 @@
 const express = require("express");
 const morgan = require("morgan"); //request logger that prints stuff out about your server request for you
 const Sequelize = require("sequelize"); //importing sequelize
-
+const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
+
+app.use(cors());
 
 const authenticateUser = (req, res, next) => {
     let message = null;
