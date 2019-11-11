@@ -12,13 +12,6 @@ class App extends Component {
         console.log(result.courses)
       }
     });
-    // $.getJSON({
-    //   url: "http://localhost:5000/api/courses", 
-    //   crossDomain: true,
-    //   success: function(result){ 
-    //     console.log(result.courses)
-    //   }
-    // });
   }
 
   render () {

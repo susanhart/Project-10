@@ -8,7 +8,7 @@ const cors = require('cors');
 const bcryptjs = require('bcryptjs');
 const auth = require('basic-auth');
 
-app.use(cors());
+//app.use(cors());
 
 const authenticateUser = async (req, res, next) => {
     let message = null;
