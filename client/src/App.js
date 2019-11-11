@@ -11,8 +11,8 @@ class App extends Component {
       success: function(result){ 
         console.log(result.courses)
       }
-    });
-  }
+    }); console.log("Component Did Mount")
+  } 
 
   render () {
     return (
