@@ -10,7 +10,7 @@ const auth = require('basic-auth');
 
 app.use(cors());
 
-const authenticateUser = (req, res, next) => {
+const authenticateUser = async (req, res, next) => {
     let message = null;
 
     // Get the user's credentials from the Authorization header.
@@ -18,7 +18,7 @@ const authenticateUser = (req, res, next) => {
 
     if (credentials) {
       // Look for a user whose `username` matches the credentials `name` property.
-      const user = User.findOne({
+      const user = await User.findOne({
         where : {
           emailAddress : credentials.name
         }
