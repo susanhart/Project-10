@@ -11,7 +11,7 @@ class App extends Component {
       url: "http://localhost:5000/api/courses", 
       type: 'get',
       success: function(result){ 
-        this.setState({ result});
+        console.log(result.courses)
       }
     }); 
   } 

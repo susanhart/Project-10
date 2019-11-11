@@ -13,19 +13,23 @@ class Courses extends Component {
         $.ajax({
           url: "http://localhost:5000/api/courses", 
           type: 'get',
-          success: function(result){ 
-            this.setResult(result);
-          }
+          success: this.setResult
         });
       }
 
-    setResult() {
+    setResult(result) {
       this.setState({ result})
     }
     
     render() {
-    return (
-    <div> </div>
+      console.log(this.state.result)
+      if(!this.state.result.length) {
+      return null;
+      }
+    return (    
+    <div>
+      {this.state.result[0].title}
+    </div>
     )
     }
 }
