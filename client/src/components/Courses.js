@@ -4,7 +4,7 @@ class Courses extends Component {
     constructor() {
       super();
       this.state = {
-        loading: [],
+        loading: false,
         result: []
       };
       this.setResult = this.setResult.bind(this);
@@ -18,7 +18,8 @@ class Courses extends Component {
       }
 
     setResult(result) {
-      this.setState({ result})
+      const courses = result.courses
+      this.setState({result: courses, loading: true})
     }
     
     render() {
@@ -26,9 +27,11 @@ class Courses extends Component {
       if(!this.state.result.length) {
       return null;
       }
+      const courseList = this.state.result.map((item,key) =>
+      <div>{item.title}</div> )
     return (    
     <div>
-      {this.state.result[0].title}
+      {courseList}
     </div>
     )
     }
