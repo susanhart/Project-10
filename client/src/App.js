@@ -31,7 +31,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
-          <Route exact path="/courses/:id" component={() => <CourseDetail/>} />
+          <Route exact path="/courses/:id" component={CourseDetail} />
         </Switch>
       </BrowserRouter>
     );
