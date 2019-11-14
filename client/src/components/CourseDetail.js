@@ -10,8 +10,9 @@ class CourseDetail extends Component {
         this.setResult = this.setResult.bind(this);
       }
         componentDidMount() {
+            const id = this.props.match.params.id
           $.ajax({
-            url: "http://localhost:5000/api/courses/", 
+            url: `http://localhost:5000/api/courses/${id}`, 
             type: 'get',
             success: this.setResult
           });
