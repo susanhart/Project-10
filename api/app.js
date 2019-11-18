@@ -303,6 +303,7 @@ app.delete("/api/courses/:id", authenticateUser, async (req, res) => {
   try{
     const course = await Course.findByPk(req.params.id);
     course.destroy(); 
+    res.location('/');
     res.status(204).end();
   } catch(err) {
     console.log(err)

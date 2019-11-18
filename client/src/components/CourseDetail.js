@@ -9,14 +9,31 @@ class CourseDetail extends Component {
         };
         this.setResult = this.setResult.bind(this);
       }
-        componentDidMount() {
-            const id = this.props.match.params.id
-          $.ajax({
-            url: `http://localhost:5000/api/courses/${id}`, 
-            type: 'get',
-            success: this.setResult
-          });
-        }
+
+      componentDidMount() {
+          const id = this.props.match.params.id
+        $.ajax({
+          url: `http://localhost:5000/api/courses/${id}`, 
+          type: 'get',
+          success: this.setResult
+        });
+      }
+
+      deleteCourse() { 
+        debugger;
+        const id = this.props.match.params.id;
+
+        $.ajax({ 
+          url: `http://localhost:5000/api/courses/${id}`, 
+          type: 'delete',
+        })
+        .done(() => {
+          alert( "Success" );
+        })
+        .fail(function() {
+          alert( "Unauthorized User Cannot Delete A Course" );
+        });
+      }
   
       setResult(result) {
         this.setState({result, loading: true})
@@ -31,8 +48,12 @@ class CourseDetail extends Component {
         <div>
         <div className="actions--bar">
           <div className="bounds">
-            <div className="grid-100"><span><a className="button" href="update-course.html">Update Course</a><a className="button" href="#">Delete Course</a></span><a
-                className="button button-secondary" href="index.html">Return to List</a></div>
+            <div className="grid-100">
+              <span>
+                <a className="button" href="update-course.html">Update Course</a>
+                <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button>
+              </span>
+              <a className="button button-secondary" href="/">Return to List</a></div>
           </div>
         </div>
         <div className="bounds course--detail">
