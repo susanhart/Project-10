@@ -1,4 +1,4 @@
-import config from './config';
+import config from './Config';
 
 export default class Data {
   api(path, method = 'GET', body = null) {
