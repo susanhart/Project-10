@@ -12,6 +12,14 @@ import Header from './components/header'
 import Courses from './components/Courses'
 import CreateCourse from './components/CreateCourse'
 import CourseDetail from './components/CourseDetail'
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import withContext from './Context';
+
+const UserSignUpWithContext = withContext(UserSignUp);
+
+ // New import
+import withContext from './Context';
 
 class App extends Component {
   componentDidMount() {
