@@ -1,3 +1,4 @@
+import React from 'react';
 export default (props) => {
    const {cancel, errors, submit, submitButtonText, elements} = props;
   
