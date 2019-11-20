@@ -18,9 +18,6 @@ import withContext from './Context';
 
 const UserSignUpWithContext = withContext(UserSignUp);
 
- // New import
-import withContext from './Context';
-
 class App extends Component {
   componentDidMount() {
     $.ajax({
@@ -37,6 +34,7 @@ class App extends Component {
       <BrowserRouter>
         <Header />
         <Switch>
+          <Route path="/signup" component={UserSignUpWithContext} />
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
           <Route exact path="/courses/:id" component={CourseDetail} />
