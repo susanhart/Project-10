@@ -48,10 +48,10 @@ class App extends Component {
           <Route path="/signin" component={UserSignInWithContext} /> 
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOut} />
-          <Route component={NotFound} />
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
           <Route exact path="/courses/:id" component={CourseDetail} />
+          <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
