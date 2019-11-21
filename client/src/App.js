@@ -17,7 +17,9 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 
-const NotFound = "Not Found (404)";
+const NotFound = () => {
+  return "Course Not Found"
+}
 
 //import withContext from './Context';
 // Connect the Header component to context
