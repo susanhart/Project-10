@@ -14,8 +14,11 @@ import CreateCourse from './components/CreateCourse'
 import CourseDetail from './components/CourseDetail'
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
-import withContext from './Context';
 import UserSignOut from './components/UserSignOut';
+
+import withContext from './Context';
+// Connect the Header component to context
+const HeaderWithContext = withContext(Header);
 
 const UserSignUpWithContext = withContext(UserSignUp);
 // Connect UserSignIn to context
