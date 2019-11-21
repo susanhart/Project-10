@@ -17,6 +17,8 @@ import UserSignIn from './components/UserSignIn';
 import withContext from './Context';
 
 const UserSignUpWithContext = withContext(UserSignUp);
+// Connect UserSignIn to context
+const UserSignInWithContext = withContext(UserSignIn);
 
 class App extends Component {
   componentDidMount() {
@@ -34,7 +36,10 @@ class App extends Component {
       <BrowserRouter>
         <Header />
         <Switch>
+          <Route path="/signin" component={UserSignInWithContext} /> 
           <Route path="/signup" component={UserSignUpWithContext} />
+          <Route path="/signout" component={UserSignOut} />
+          <Route component={NotFound} />
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
           <Route exact path="/courses/:id" component={CourseDetail} />

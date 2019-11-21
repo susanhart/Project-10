@@ -13,7 +13,10 @@ export class Provider extends Component {
   render() {
     const value = {
       data: this.data,
-      actions: {}
+      actions: {
+        // Add the 'actions' property and object
+      signIn: this.signIn
+      }
     };
 
     return (
