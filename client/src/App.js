@@ -43,7 +43,7 @@ class App extends Component {
   render () {
     return (
       <BrowserRouter>
-        <Header />
+        <HeaderWithContext/>
         <Switch>
           <Route path="/signin" component={UserSignInWithContext} /> 
           <Route path="/signup" component={UserSignUpWithContext} />
