@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import withContext from './Context';
 import logo from './logo.svg';
 import $ from 'jquery';
 import { 
@@ -16,7 +17,9 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 
-import withContext from './Context';
+const NotFound = "Not Found (404)";
+
+//import withContext from './Context';
 // Connect the Header component to context
 const HeaderWithContext = withContext(Header);
 
