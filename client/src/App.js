@@ -15,6 +15,7 @@ import CourseDetail from './components/CourseDetail'
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import withContext from './Context';
+import UserSignOut from './components/UserSignOut';
 
 const UserSignUpWithContext = withContext(UserSignUp);
 // Connect UserSignIn to context
