@@ -18,7 +18,7 @@ import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 
 const NotFound = () => {
-  return "Course Not Found"
+  return "Not Found"
 }
 
 //import withContext from './Context';
