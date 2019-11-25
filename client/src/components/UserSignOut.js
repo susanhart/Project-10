@@ -6,3 +6,4 @@ export default () => {
     <Redirect to="/" />
   );
 }
+// document.getElementById("myBtn").addEventListener("click", function(){
