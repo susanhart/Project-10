@@ -46,8 +46,7 @@ export class Provider extends Component {
     return user;
      
     };
-  }
-  
+   
   signOut = () => {
     this.setState(() => {
       return { 
@@ -57,7 +56,7 @@ export class Provider extends Component {
     Cookies.remove('authenticatedUser');
     Cookies.remove('authenticatedUserPassword');
   }
-
+}
 
 export const Consumer = Context.Consumer;
 
