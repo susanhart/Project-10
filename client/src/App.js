@@ -25,6 +25,7 @@ const NotFound = () => {
 //import withContext from './Context';
 // Connect the Header component to context
 const HeaderWithContext = withContext(Header);
+const AuthWithContext = withContext(Authenticated);
 
 const UserSignUpWithContext = withContext(UserSignUp);
 // Connect UserSignIn to context
@@ -46,6 +47,8 @@ class App extends Component {
       <BrowserRouter>
         <HeaderWithContext/>
         <Switch>
+          <Route exact path="/" component={Public} />
+          <PrivateRoute path="/authenticated" component={AuthWithContext} />
           <Route path="/signin" component={UserSignInWithContext} /> 
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOut} />
