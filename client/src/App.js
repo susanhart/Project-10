@@ -17,7 +17,7 @@ import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
 import PrivateRoute from './PrivateRoute';
-
+import Authenticated from './components/Authenticated';
 const NotFound = () => {
   return "Not Found"
 }
@@ -30,6 +30,7 @@ const AuthWithContext = withContext(Authenticated);
 const UserSignUpWithContext = withContext(UserSignUp);
 // Connect UserSignIn to context
 const UserSignInWithContext = withContext(UserSignIn);
+const UserSignOutWithContext = withContext(UserSignOut);
 
 class App extends Component {
   componentDidMount() {
@@ -47,11 +48,11 @@ class App extends Component {
       <BrowserRouter>
         <HeaderWithContext/>
         <Switch>
-          <Route exact path="/" component={Public} />
+          {/* <Route exact path="/" component={Public} /> */}
           <PrivateRoute path="/authenticated" component={AuthWithContext} />
           <Route path="/signin" component={UserSignInWithContext} /> 
           <Route path="/signup" component={UserSignUpWithContext} />
-          <Route path="/signout" component={UserSignOut} />
+          <Route path="/signout" component={UserSignOutWithContext} />
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
           <Route exact path="/courses/:id" component={CourseDetail} />

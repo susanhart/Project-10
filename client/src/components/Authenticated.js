@@ -1,3 +1,4 @@
+import React from 'react'
 export default ({ context }) => {
     const authUser = context.authenticatedUser;
     
