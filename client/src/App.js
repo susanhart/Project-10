@@ -16,6 +16,8 @@ import CourseDetail from './components/CourseDetail'
 import UserSignUp from './components/UserSignUp';
 import UserSignIn from './components/UserSignIn';
 import UserSignOut from './components/UserSignOut';
+import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
 
 const NotFound = () => {
   return "Not Found"
