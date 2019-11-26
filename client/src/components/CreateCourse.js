@@ -6,15 +6,9 @@ class CreateCourse extends Component {
       this.state = {
        
       };
-    //   this.setResult = this.setResult.bind(this);
+    
     }
       
-
-    // setResult(result) {
-    //   const courses = result.courses
-    //   this.setState({result: courses, loading: true})
-    // }
-    
     render() {
     return (    
     <div>
