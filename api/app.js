@@ -321,7 +321,20 @@ app.post("/api/users", async (req, res, next) => {
   let lastName = req.body.lastName
   let emailAddress = req.body.emailAddress
   let password = req.body.password 
-
+  
+  let errors=[]
+  if(!firstName){
+    errors.push ("Please provide your first name")
+  }
+  if(!lastName){
+    errors.push ("Please provide your last name")
+  }
+  if(!emailAddress){
+    errors.push ("Please provide a valid email address")
+  }
+  if(!password){
+    errors.push ("Please provide your password")
+  }
    // Get the user from the request body. 
     if (firstName && lastName && emailAddress && password) {
       password = bcryptjs.hashSync(password);
@@ -335,7 +348,7 @@ app.post("/api/users", async (req, res, next) => {
     res.location('/');
     res.status(201).end();
     } else {
-      res.status(400).json({error:"Please provide the missing information"})
+      res.status(400).json({errors:errors})
     }
        
 } catch(err){
