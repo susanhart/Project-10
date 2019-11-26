@@ -43,14 +43,16 @@ class CourseDetail extends Component {
       if(!this.state.result || !this.state.result.user) {
         return null;
       }
+      const {context} = this.props;
     return (    
         <div>
         <div className="actions--bar">
           <div className="bounds">
             <div className="grid-100">
               <span>
-              {/* inside result check if this authed user is the owner, owner ? Update Course : null    */}
-
+              {/* 1) Grab the authenticatedUser from context; 2)Create a ternary expression to show and hide the update and delete course buttons   */}
+              {/* if the person is authorized show the button, otherwise don't */}
+                 {context.authenticatedUser} 
                 <a className="button" href="update-course.html">Update Course</a>
                 <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button>
               </span>

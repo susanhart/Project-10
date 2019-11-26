@@ -31,7 +31,7 @@ const UserSignUpWithContext = withContext(UserSignUp);
 // Connect UserSignIn to context
 const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
-
+const CourseDetailWithContext = withContext(CourseDetail);
 class App extends Component {
   componentDidMount() {
     $.ajax({
@@ -56,7 +56,7 @@ class App extends Component {
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route exact path='/' render={() => <Courses/>} />
           <Route exact path="/courses/create" component={() => <CreateCourse/>} />
-          <Route exact path="/courses/:id" component={CourseDetail} />
+          <Route exact path="/courses/:id" component={CourseDetailWithContext} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
