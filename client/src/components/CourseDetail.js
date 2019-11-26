@@ -49,6 +49,8 @@ class CourseDetail extends Component {
           <div className="bounds">
             <div className="grid-100">
               <span>
+              {/* inside result check if this authed user is the owner, owner ? Update Course : null    */}
+
                 <a className="button" href="update-course.html">Update Course</a>
                 <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button>
               </span>

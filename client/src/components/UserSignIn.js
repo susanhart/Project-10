@@ -64,14 +64,18 @@ export default class UserSignIn extends Component {
 
   submit = () => {
     const { context } = this.props;
-    const { from } = this.props.location.state || { from: { pathname: '/authenticated' } };
+    const { from } = this.props.location.state || { from: { pathname: '/' } };
     const { username, password } = this.state;
+    console.log(username)
+    console.log(password)
     context.actions.signIn(username, password)
     .then( user => {
+      console.log(user)
       if (user === null) {
         this.setState(() => {
           return { errors: [ 'Sign-in was unsuccessful' ] };
       });
+
     } else {
       this.props.history.push(from);
       console.log(`SUCCESS! ${username} is now signed in!`);
