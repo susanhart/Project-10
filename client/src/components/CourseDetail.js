@@ -51,10 +51,13 @@ class CourseDetail extends Component {
             <div className="grid-100">
               <span>
               {/* 1) Grab the authenticatedUser from context; 2)Create a ternary expression to show and hide the update and delete course buttons   */}
-              {/* if the person is authorized show the button, otherwise don't */}
-                 {context.authenticatedUser} 
-                <a className="button" href="update-course.html">Update Course</a>
-                <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button>
+              {/* condtion ? '' : 'don't show button' */}
+              {context.authenticatedUser ?  
+                (<><a className="button" href="update-course.html">Update Course</a>
+                <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>)
+                :
+                ''
+              }
               </span>
               <a className="button button-secondary" href="/">Return to List</a></div>
           </div>

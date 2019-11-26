@@ -55,7 +55,7 @@ class App extends Component {
           <Route path="/signup" component={UserSignUpWithContext} />
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route exact path='/' render={() => <Courses/>} />
-          <Route exact path="/courses/create" component={() => <CreateCourse/>} />
+          <PrivateRoute exact path="/courses/create" component={() => <CreateCourse/>} />
           <Route exact path="/courses/:id" component={CourseDetailWithContext} />
           <Route component={NotFound} />
         </Switch>
