@@ -1,4 +1,4 @@
-// import $ from 'jquery';
+import $ from 'jquery';
 import React, {Component} from 'react'
 import Form from "./Form";
 
@@ -33,9 +33,10 @@ class CreateCourse extends Component {
       //Create the ajax call
 
       $.ajax({
-        url: `http://localhost:5000/api/courses/${id}`, 
-        type: 'post',
-        success: this.setResult
+        url: `http://localhost:5000/api/courses`,
+        type: 'POST',
+        success: this.setResult,
+        data: this.state
       });
 
     //   .then( user => {

@@ -20,7 +20,6 @@ class CourseDetail extends Component {
       }
 
       deleteCourse() { 
-        debugger;
         const id = this.props.match.params.id;
 
         $.ajax({ 
@@ -52,7 +51,7 @@ class CourseDetail extends Component {
               <span>
               {/* 1) Grab the authenticatedUser from context; 2)Create a ternary expression to show and hide the update and delete course buttons   */}
               {/* condtion ? '' : 'don't show button' */}
-              {context.authenticatedUser ?  
+              {context.authenticatedUser && result.user?  
                 (<><a className="button" href="update-course.html">Update Course</a>
                 <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>)
                 :
