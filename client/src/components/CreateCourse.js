@@ -32,6 +32,12 @@ class CreateCourse extends Component {
       
       //Create the ajax call
 
+      $.ajax({
+        url: `http://localhost:5000/api/courses/${id}`, 
+        type: 'post',
+        success: this.setResult
+      });
+
     //   .then( user => {
     //     console.log(user)
     //     if (user === null) {
