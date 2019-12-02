@@ -1,15 +1,65 @@
 // import $ from 'jquery';
 import React, {Component} from 'react'
+import Form from "./Form";
+
 class CreateCourse extends Component {
     constructor() {
       super();
       this.state = {
-       
+        title: '',
+        description: '',
+        estimatedTime: '',
+        materialsNeeded: '',
+        errors: [],
       };
     
     }
+    change = (event) => {
+      const name = event.target.name;
+      const value = event.target.value;
+  
+      this.setState(() => {
+        return {
+          [name]: value
+        };
+      });
+    }
+    submit = () => {
+      const { title, description } = this.state;
+      // context.actions.signIn(title, description)
+      console.log(title);
+      console.log(description);
       
+      //Create the ajax call
+
+    //   .then( user => {
+    //     console.log(user)
+    //     if (user === null) {
+    //       this.setState(() => {
+    //         return { errors: [ 'Sign-in was unsuccessful' ] };
+    //     });
+  
+    //   } else {
+    //     this.props.history.push(from);
+    //     console.log(`SUCCESS! ${username} is now signed in!`);
+    //       }
+    //   }
+    //   )
+    //   .catch( err => {
+    //     console.log(err);
+    //     this.props.history.push('/error')
+    // } )
+      
+  }
+  
     render() {
+      const {
+        title,
+        description,
+        estimatedTime,
+        materialsNeeded,
+        errors
+      } = this.state;
     return (    
     <div>
         <h1>Create Course</h1>
@@ -23,36 +73,41 @@ class CreateCourse extends Component {
               </ul>
             </div>
           </div>
-          <form>
-            <div className="grid-66">
-              <div className="course--header">
-                <h4 className="course--label">Course</h4>
-                <div><input id="title" name="title" type="text" className="input-title course--title--input" placeholder="Course title..."
-                    value=""/></div>
-                <p>By Joe Smith</p>
-              </div>
-              <div className="course--description">
-                <div><textarea id="description" name="description" className="" placeholder="Course description..."></textarea></div>
-              </div>
-            </div>
-            <div className="grid-25 grid-right">
-              <div className="course--stats">
-                <ul className="course--stats--list">
-                  <li className="course--stats--list--item">
-                    <h4>Estimated Time</h4>
-                    <div><input id="estimatedTime" name="estimatedTime" type="text" className="course--time--input"
-                        placeholder="Hours" value=""/></div>
-                  </li>
-                  <li className="course--stats--list--item">
-                    <h4>Materials Needed</h4>
-                    <div><textarea id="materialsNeeded" name="materialsNeeded" className="" placeholder="List materials..."></textarea></div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="grid-100 pad-bottom"><button className="button" type="submit">Create Course</button><button className="button button-secondary" onClick="event.preventDefault(); location.href='index.html';">Cancel</button></div>
-          </form>
-        </div></div>
+          <Form
+            cancel={this.cancel}
+            submit={this.submit}
+            errors={errors}
+            submitButtonText="Create Course"
+            elements={() => (
+              <React.Fragment>
+                <input 
+                  id="title" 
+                  name="title" 
+                  type="text" 
+                  onChange={this.change} 
+                  placeholder="Title" />
+                <textarea 
+                  id="description" 
+                  name="description"
+                  onChange={this.change} 
+                  type="textarea"
+                  placeholder="Description" />
+                <input 
+                  id="estimatedTime" 
+                  name="estimatedTime"
+                  onChange={this.change} 
+                  type="text" 
+                  placeholder="Estimated Time" /> 
+                <input 
+                  id="materialsNeeded" 
+                  name="materialsNeeded"
+                  onChange={this.change} 
+                  type="text"  
+                  placeholder="Materials Needed" />                   
+              </React.Fragment>
+            )} />
+        </div>
+      </div>
     )
     }
 }
