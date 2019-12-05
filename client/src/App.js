@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import './global.css'; 
-import Header from './components/header'
+import Header from './components/Header'
 import Courses from './components/Courses'
 import CreateCourse from './components/CreateCourse'
 import CourseDetail from './components/CourseDetail'

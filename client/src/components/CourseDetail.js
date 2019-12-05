@@ -43,6 +43,7 @@ class CourseDetail extends Component {
         return null;
       }
       const {context} = this.props;
+      debugger;
     return (    
         <div>
         <div className="actions--bar">
@@ -51,12 +52,14 @@ class CourseDetail extends Component {
               <span>
               {/* 1) Grab the authenticatedUser from context; 2)Create a ternary expression to show and hide the update and delete course buttons   */}
               {/* condtion ? '' : 'don't show button' */}
-              {context.authenticatedUser && result.user?  
-                (<><a className="button" href="update-course.html">Update Course</a>
-                <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>)
-                :
-                ''
-              }
+              {/* if (authorizedUser) {
+              emailAddress = context.authenticatedUser.emailAddress
+              password = context.authenticatedUserPassword ?
+               */}
+               {context.authenticatedUser && context.authenticatedUser.id === this.state.result.user.id ? (<><a className="button" href="update-course.html">Update Course</a><button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button></>): null}
+                
+                {/* <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>) */}
+            
               </span>
               <a className="button button-secondary" href="/">Return to List</a></div>
           </div>
