@@ -78,7 +78,6 @@ export default class UserSignIn extends Component {
 
     } else {
       this.props.history.push(from.pathname);
-      this.handleAuth(true);
       console.log(`SUCCESS! ${username} is now signed in!`);
       console.log(`SUCCESS! redirecting to ${from}`,from);
         }
