@@ -33,6 +33,9 @@ const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CourseDetailWithContext = withContext(CourseDetail);
 class App extends Component {
+  state = {
+    authenticated :  false
+  }
   componentDidMount() {
     $.ajax({
       url: "http://localhost:5000/api/courses", 
@@ -41,9 +44,15 @@ class App extends Component {
         console.log(result.courses)
       }
     }); 
+    console.log("Component Mountaed again");
   } 
 
+  handleAuth(value){
+    this.setState({authenticated: value})
+  }
+
   render () {
+    console.log("Reloading...");
     return (
       <BrowserRouter>
         <HeaderWithContext/>

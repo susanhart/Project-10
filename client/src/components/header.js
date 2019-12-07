@@ -5,7 +5,10 @@ export default class Header extends React.PureComponent {
   render() {
     const { context } = this.props;
     const authUser = context.authenticatedUser;
+    console.log(`Header was re-rendered auth says ${authUser}`,authUser);
+
     return (
+      
       <div className="header">
         <div className="bounds">
           <h1 className="header--logo">MyAuth</h1>
