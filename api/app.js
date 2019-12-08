@@ -15,6 +15,7 @@ const authenticateUser = async (req, res, next) => {
     const credentials = auth(req);
 
     if (credentials) {
+      console.log(credentials);
       // Look for a user whose `username` matches the credentials `name` property.
       const user = await User.findOne({
         where : {

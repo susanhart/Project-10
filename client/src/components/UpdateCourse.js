@@ -1,2 +1,124 @@
 import React, { Component } from 'react';
 import Form from './Form.js';
+import axios from "axios";
+
+export default class UpdateCourse extends Component {
+    state = {
+        title: "",
+        description: "",
+        estimatedTime: "",
+        materialsNeeded: "",
+        studentName: "",
+        errors: []
+    }
+    componentDidMount(){
+        const {context} = this.props;
+        const courseId = this.props.match.params.id;
+        axios.get(`http://localhost:5000/api/courses/${courseId}`).then(response => {
+            const course = response.data;
+
+            this.setState({
+                title: course.title,
+                description: course.description,
+                estimatedTime: course.estimatedTime || "",
+                materialsNeeded: course.materialsNeeded || "",
+            });
+        });
+        
+        console.log(context);
+    }
+    change = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+    
+        this.setState(() => {
+          return {
+            [name]: value
+          };
+        });
+      }
+      submit = () => {
+        const { title, description } = this.state;
+        const { emailAddress, password } = this.props.context.authenticatedUser;
+        // context.actions.signIn(title, description)
+        console.log(title);
+        console.log(description);
+        
+        //Create the ajax call
+        const courseId = this.props.match.params.id;
+    
+        axios.put(`http://localhost:5000/api/courses/${courseId}`, this.state, {
+            auth: {
+                username: emailAddress,
+                password: password,
+            }
+        }).then(() => this.props.history.push("/"))
+        .catch(err => console.log(err.response.data));
+    }
+    cancel = () => {
+        this.props.history.push("/");
+    };
+    
+      render() {
+        const {
+          title,
+          description,
+          estimatedTime,
+          materialsNeeded,
+          errors
+        } = this.state;
+      return (    
+      <div>
+          <h1>Update Course</h1>
+          <div>
+            <div>
+              <h2 className="validation--errors--label">Validation errors</h2>
+              <div className="validation-errors">
+                <ul>
+                  <li>Please provide a value for "Title"</li>
+                  <li>Please provide a value for "Description"</li>
+                </ul>
+              </div>
+            </div>
+            <Form
+              cancel={this.cancel}
+              submit={this.submit}
+              errors={errors}
+              submitButtonText="Update Course"
+              elements={() => (
+                <React.Fragment>
+                  <input 
+                    id="title" 
+                    name="title" 
+                    type="text" 
+                    onChange={this.change} 
+                    value={title}
+                    placeholder="Title" />
+                  <textarea 
+                    id="description" 
+                    name="description"
+                    onChange={this.change} 
+                    value={description}
+                    type="textarea"
+                    placeholder="Description" />
+                  <input 
+                    id="estimatedTime" 
+                    name="estimatedTime"
+                    onChange={this.change}
+                    value={estimatedTime}
+                    type="text" 
+                    placeholder="Estimated Time" /> 
+                  <input 
+                    id="materialsNeeded" 
+                    name="materialsNeeded"
+                    onChange={this.change}
+                    value={materialsNeeded} 
+                    type="text"  
+                    placeholder="Materials Needed" />                   
+                </React.Fragment>
+              )} />
+          </div>
+        </div>
+      )
+      }
+}

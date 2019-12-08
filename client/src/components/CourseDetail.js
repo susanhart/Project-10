@@ -1,3 +1,4 @@
+import axios from "axios";
 import $ from 'jquery';
 import React, {Component} from 'react'
 class CourseDetail extends Component {
@@ -22,16 +23,18 @@ class CourseDetail extends Component {
       deleteCourse() { 
         const id = this.props.match.params.id;
 
-        $.ajax({ 
-          url: `http://localhost:5000/api/courses/${id}`, 
-          type: 'delete',
-        })
-        .done(() => {
-          alert( "Success" );
-        })
-        .fail(function() {
-          alert( "Unauthorized User Cannot Delete A Course" );
-        });
+        const { emailAddress, password } = this.props.context.authenticatedUser;
+      // context.actions.signIn(title, description)
+      
+      //Create the ajax call
+      axios.delete(`http://localhost:5000/api/courses/${id}`, {
+        auth: {
+          username: emailAddress,
+          password: password,
+        }
+      }).then(() => {
+        this.props.history.push("/");
+      });
       }
   
       setResult(result) {
@@ -43,7 +46,6 @@ class CourseDetail extends Component {
         return null;
       }
       const {context} = this.props;
-      debugger;
     return (    
         <div>
         <div className="actions--bar">
@@ -56,7 +58,7 @@ class CourseDetail extends Component {
               emailAddress = context.authenticatedUser.emailAddress
               password = context.authenticatedUserPassword ?
                */}
-               {context.authenticatedUser && context.authenticatedUser.id === this.state.result.user.id ? (<><a className="button" href="update-course.html">Update Course</a><button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button></>): null}
+               {context.authenticatedUser && context.authenticatedUser.id === this.state.result.user.id ? (<><a className="button" href={`/courses/${this.state.result.id}/update`}>Update Course</a><button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button></>): null}
                 
                 {/* <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>) */}
             

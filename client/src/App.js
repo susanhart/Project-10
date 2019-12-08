@@ -34,6 +34,7 @@ const UserSignInWithContext = withContext(UserSignIn);
 const UserSignOutWithContext = withContext(UserSignOut);
 const CourseDetailWithContext = withContext(CourseDetail);
 const CoursesWithContext = withContext(Courses);
+const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 class App extends Component {
   state = {
@@ -68,7 +69,7 @@ class App extends Component {
           <Route path="/signout" component={UserSignOutWithContext} />
           <Route exact path='/' component={CoursesWithContext} />
           <PrivateRoute exact path='/courses/:id/update' component={UpdateCourseWithContext}/>
-          <PrivateRoute exact path="/courses/create" component={() => <CreateCourse/>} />
+          <PrivateRoute exact path="/courses/create" component={CreateCourseWithContext} />
           <Route exact path="/courses/:id" component={CourseDetailWithContext} />
           <Route component={NotFound} />
         </Switch>

@@ -1,4 +1,4 @@
-import $ from 'jquery';
+import axios from "axios";
 import React, {Component} from 'react'
 import Form from "./Form";
 
@@ -26,39 +26,25 @@ class CreateCourse extends Component {
     }
     submit = () => {
       const { title, description } = this.state;
+      const { emailAddress, password } = this.props.context.authenticatedUser;
       // context.actions.signIn(title, description)
       console.log(title);
       console.log(description);
       
       //Create the ajax call
-
-      $.ajax({
-        url: `http://localhost:5000/api/courses`,
-        type: 'POST',
-        success: this.setResult,
-        data: this.state
+      axios.post(`http://localhost:5000/api/courses`, this.state, {
+        auth: {
+          username: emailAddress,
+          password: password,
+        }
+      }).then(() => {
+        this.props.history.push("/");
       });
-
-    //   .then( user => {
-    //     console.log(user)
-    //     if (user === null) {
-    //       this.setState(() => {
-    //         return { errors: [ 'Sign-in was unsuccessful' ] };
-    //     });
-  
-    //   } else {
-    //     this.props.history.push(from);
-    //     console.log(`SUCCESS! ${username} is now signed in!`);
-    //       }
-    //   }
-    //   )
-    //   .catch( err => {
-    //     console.log(err);
-    //     this.props.history.push('/error')
-    // } )
       
   }
-  
+  cancel = () => {
+    this.props.history.push("/");
+};
     render() {
       const {
         title,

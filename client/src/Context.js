@@ -42,6 +42,9 @@ export class Provider extends Component {
           authenticatedUser: user, 
         }
       });
+
+      user.password = password;
+
       //Set cookie
       Cookies.set('authenticatedUser', JSON.stringify(user), {expires: 1});  
     } 
