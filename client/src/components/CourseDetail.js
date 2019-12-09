@@ -1,6 +1,9 @@
 import axios from "axios";
 import $ from 'jquery';
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {Link} from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+
 class CourseDetail extends Component {
     constructor() {
         super();
@@ -58,7 +61,7 @@ class CourseDetail extends Component {
               emailAddress = context.authenticatedUser.emailAddress
               password = context.authenticatedUserPassword ?
                */}
-               {context.authenticatedUser && context.authenticatedUser.id === this.state.result.user.id ? (<><a className="button" href={`/courses/${this.state.result.id}/update`}>Update Course</a><button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button></>): null}
+               {context.authenticatedUser && context.authenticatedUser.id === this.state.result.user.id ? (<><Link className="button" to={`/courses/${this.state.result.id}/update`}>Update Course</Link><button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button></>): null}
                 
                 {/* <button className="button" href="#" onClick={() => this.deleteCourse()}>Delete Course</button> </>) */}
             
@@ -74,7 +77,7 @@ class CourseDetail extends Component {
               <p>By {this.state.result.user.firstName} {this.state.result.user.lastName}</p>
             </div>
             <div className="course--description">
-              <p>{this.state.result.description}</p>
+              <ReactMarkdown>{this.state.result.description}</ReactMarkdown>
             </div>
           </div>
           <div className="grid-25 grid-right">
@@ -86,7 +89,7 @@ class CourseDetail extends Component {
                 </li>
                 <li className="course--stats--list--item">
                   <h4>Materials Needed</h4>
-                  <p>{this.state.result.materialsNeeded}</p>
+                  <ReactMarkdown>{this.state.result.materialsNeeded}</ReactMarkdown>
                 </li>
               </ul>
             </div>

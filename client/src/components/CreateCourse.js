@@ -39,6 +39,8 @@ class CreateCourse extends Component {
         }
       }).then(() => {
         this.props.history.push("/");
+      }).catch((error)=>{
+        this.setState({errors: error.response.data.error})
       });
       
   }
@@ -57,15 +59,6 @@ class CreateCourse extends Component {
     <div>
         <h1>Create Course</h1>
         <div>
-          <div>
-            <h2 className="validation--errors--label">Validation errors</h2>
-            <div className="validation-errors">
-              <ul>
-                <li>Please provide a value for "Title"</li>
-                <li>Please provide a value for "Description"</li>
-              </ul>
-            </div>
-          </div>
           <Form
             cancel={this.cancel}
             submit={this.submit}
@@ -76,23 +69,27 @@ class CreateCourse extends Component {
                 <input 
                   id="title" 
                   name="title" 
+                  value={title}
                   type="text" 
                   onChange={this.change} 
                   placeholder="Title" />
                 <textarea 
                   id="description" 
                   name="description"
+                  value={description}
                   onChange={this.change} 
                   type="textarea"
                   placeholder="Description" />
                 <input 
                   id="estimatedTime" 
                   name="estimatedTime"
+                  value={estimatedTime}
                   onChange={this.change} 
                   type="text" 
                   placeholder="Estimated Time" /> 
                 <input 
                   id="materialsNeeded" 
+                  value={materialsNeeded}
                   name="materialsNeeded"
                   onChange={this.change} 
                   type="text"  

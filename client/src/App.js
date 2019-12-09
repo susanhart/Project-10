@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import withContext from './Context';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import $ from 'jquery';
 import { 
   BrowserRouter,

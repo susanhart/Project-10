@@ -141,8 +141,9 @@ Course.init(
       type: Sequelize.STRING, //properties of the course
       allowNull: false,
       validate: {
-        notNull: {
+        len: {
           msg: 'Please enter the course title',
+          args: 1
         },
       },
     },
@@ -150,8 +151,9 @@ Course.init(
       type: Sequelize.TEXT,
       allowNull: false,
       validate: {
-        notNull: {
+        len: {
           msg: 'Please enter the course description',
+          args: 1
         },
       },
     },
@@ -258,11 +260,11 @@ app.post("/api/courses", authenticateUser, async (req, res, next) => {
     res.status(201).end()
   }catch(err){
     if (err.name === "SequelizeValidationError" || "SequelizeUniqueConstraintError") {
-  res.status(400).json({error: err.message})
-} else {
-  return next(err);
-}
-
+      const response = err.errors.map(error=>{return error.message})
+      res.status(400).json({error: response})
+    } else {
+      return next(err);
+    }
   }
 })
 
