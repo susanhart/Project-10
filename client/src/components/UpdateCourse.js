@@ -38,6 +38,7 @@ export default class UpdateCourse extends Component {
         });
       }
       submit = () => {
+        console.log("WE CALLED SUBMIT")
         const { title, description } = this.state;
         const { emailAddress, password } = this.props.context.authenticatedUser;
         // context.actions.signIn(title, description)
@@ -53,10 +54,13 @@ export default class UpdateCourse extends Component {
                 password: password,
             }
         }).then(() => this.props.history.push("/"))
-        .catch(err => console.log(err.response.data));
+        .catch((error)=>{
+          console.log(error.response.data)
+          this.setState({errors: error.response.data.error})
+        });
     }
     cancel = () => {
-        this.props.history.push("/");
+        this.props.history.goBack();
     };
     
       render() {
@@ -72,13 +76,7 @@ export default class UpdateCourse extends Component {
           <h1>Update Course</h1>
           <div>
             <div>
-              <h2 className="validation--errors--label">Validation errors</h2>
-              <div className="validation-errors">
-                <ul>
-                  <li>Please provide a value for "Title"</li>
-                  <li>Please provide a value for "Description"</li>
-                </ul>
-              </div>
+              
             </div>
             <Form
               cancel={this.cancel}

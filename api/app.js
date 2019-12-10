@@ -288,8 +288,12 @@ app.put("/api/courses/:id", authenticateUser, async (req, res, next) => {
        await course.update(req.body);
        res.status(204).end(); 
      }
-   } else if (!req.body.title || !req.body.description) {
-     res.status(400).json({ message: 'Please include a title and description!'})
+   } else if (!req.body.title && !req.body.description) {
+     res.status(500).send({ error: ['Please include a title and description!']})
+   } else if (!req.body.title){
+     res.status(500).send({error: ['Please include a title!']})
+   } else if (!req.body.description){
+     res.status(500).send({error: ['Please include a description!']})
    }
   } catch(err) {
     //res.status(400).send({
