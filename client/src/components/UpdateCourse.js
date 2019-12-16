@@ -46,7 +46,7 @@ export default class UpdateCourse extends Component {
         console.log(description);
         
         //Create the ajax call
-        const courseId = this.props.match.params.id;
+        const courseId = this.props.match.params.id; // react router passes to the properties on the component using it
     
         axios.put(`http://localhost:5000/api/courses/${courseId}`, this.state, {
             auth: {

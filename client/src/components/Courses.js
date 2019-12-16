@@ -10,7 +10,7 @@ class Courses extends Component {
       };
       this.setResult = this.setResult.bind(this);
     }
-      componentDidMount() {
+      componentDidMount() { //component did mount is used to fetch data from the API
         $.ajax({
           url: "http://localhost:5000/api/courses", 
           type: 'get',

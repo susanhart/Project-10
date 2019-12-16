@@ -14,7 +14,7 @@ class CreateCourse extends Component {
       };
     
     }
-    change = (event) => {
+    change = (event) => { //handles whenever one of the fields changes, extrapolates the name and event from the component
       const name = event.target.name;
       const value = event.target.value;
   
@@ -47,7 +47,7 @@ class CreateCourse extends Component {
   cancel = () => {
     this.props.history.push("/");
 };
-    render() {
+    render() { //define the HTML that is then returned when you use the component
       const {
         title,
         description,
@@ -65,7 +65,7 @@ class CreateCourse extends Component {
             errors={errors}
             submitButtonText="Create Course"
             elements={() => (
-              <React.Fragment>
+              <React.Fragment> 
                 <input 
                   id="title" 
                   name="title" 
@@ -101,4 +101,4 @@ class CreateCourse extends Component {
     )
     }
 }
-export default CreateCourse;
+export default CreateCourse; //makes this Create Course component available in other files
